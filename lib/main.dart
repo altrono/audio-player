@@ -46,6 +46,14 @@ class AudioPlayerScreen extends StatefulWidget {
 class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   late AudioPlayer _audioPlayer;
 
+  final _playList = ConcatenatingAudioSource(
+      children: [
+        AudioSource.uri(
+          Uri.parse('asset:///assets/audio/bobmarley.mp3')
+        )
+      ],
+  );
+
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
         _audioPlayer.positionStream,
@@ -108,6 +116,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                       baseBarColor: Colors.grey[600],
                       bufferedBarColor: Colors.grey,
                       progressBarColor: Colors.red,
+                      thumbColor: Colors.red,
                       timeLabelTextStyle: const TextStyle(
                         color:  Colors.white,
                         fontWeight: FontWeight.w600
